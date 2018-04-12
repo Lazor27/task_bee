@@ -1,0 +1,11 @@
+<?php require_once(VIEWS_PATH . DS . tasks . DS . 'task_parts' . DS . 'view_part.html'); ?>
+
+<div class="col-md-3">
+    <a href="/admin/tasks/edit/<?=$data['task']['id'] ?>"><button class="btn btn-sm btn-success">Edit</button></a>
+    <p>  </p>
+    <?php
+        if($data['task']['status'] == '0'){?>
+            <a href="/admin/tasks/setDone/<?=$data['task']['id'] ?>"><button class="btn btn-sm btn-success">Set task done</button></a>
+        <?php }
+    ?>
+</div>

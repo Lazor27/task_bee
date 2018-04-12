@@ -1,0 +1,52 @@
+<div class="col-md-8">
+    <a href="<?=$data[role]?>/tasks/add/">
+        <button class="btn btn-sm btn-success">New article</button>
+    </a>
+</div>
+<?php $sort = $_GET["sort"] ?? null; ?>
+
+<div class="col-md-3">
+    <p>Cортировка по:</p>
+    <select class="form-control" onchange="window.location.href=this.options[this.selectedIndex].value">
+        <option <?php if($sort == 'id') echo 'selected'; ?> value="<?=$data[role]?>/tasks/index/1?sort=id">ID</option>
+        <option <?php if($sort == 'name') echo 'selected'; ?> value="<?=$data[role]?>/tasks/index/1?sort=name">Name</option>
+        <option <?php if($sort == 'email') echo 'selected';?> value="<?=$data[role]?>/tasks/index/1?sort=email">Email</option>
+        <option <?php if($sort == 'status') echo 'selected';?> value="<?=$data[role]?>/tasks/index/1?sort=status">Status</option>
+    </select>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+    <?php
+         $i = 0;
+         foreach($data['tasks'] as $task_data){ ?>
+    <tr <?php if ($i%2) {?> class="active"<?php } ?> >
+        <td><a href="<?=$data[role]?>/tasks/view/<?= $task_data['id'] ?>"><?= $task_data['id']?></a></td>
+        <td><a href="<?=$data[role]?>/tasks/view/<?= $task_data['id'] ?>"><?= $task_data['name'] ?></a></td>
+        <td><a href="<?=$data[role]?>/tasks/view/<?= $task_data['id'] ?>"><?= $task_data['email'] ?></a></td>
+        <td><a href="<?=$data[role]?>/tasks/view/<?= $task_data['id'] ?>"><?php if($task_data['status'] == '1') echo "Done"; else echo "Not Done";  ?></a></td>
+        </tr>
+    <?php $i++; } ?>
+    </tbody>
+</table>
+
+<ul class="pagination">
+    <?php
+        $p = $data['p'];
+        $sort = isset($_GET["sort"]) ? '?sort=' . $_GET["sort"] : null;
+        foreach ($p->buttons as $button) :
+    if ($button->isActive) : ?>
+    <li> <a href = '<?=$button->page?><?=$sort ?>'><?=$button->text?></a></li>
+    <?php else : ?>
+    <li><span style="color:#555555"><?=$button->text?></span></li>
+    <?php endif;
+        endforeach; ?>
+</ul>

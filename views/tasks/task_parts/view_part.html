@@ -1,0 +1,18 @@
+<div class="col-md-2"></div>
+
+<div class="col-md-7">
+    <h1><?=$data['task']['name']?></h1>
+    <br>
+    <p><?=$data['task']['description']?></p>
+    <br>
+    <b>Status of this task <?php if($data['task']['status'] == '1') echo 'done'; else echo 'Not done';?></b></p>
+    <?php
+        $domain =  $_SERVER['SERVER_NAME'];
+        $path = ROOT. DS."webroot".DS."img".DS.$data['task']['id'].DS ;
+        $dir = scandir($path);
+        $img = "http://" . $domain ."/img/" . $data['task']['id'] . "/" . $dir[2];
+    ?>
+    <img src="<?=$img ?>" >
+</div>
+
+
